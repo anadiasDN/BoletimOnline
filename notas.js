@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const login = localStorage.getItem("login");
   const linhas = document.querySelectorAll("tbody tr");
 
-  // 💡 Se for aluno, buscar as notas no banco e preencher a tabela
+  
   if (tipo === "aluno") {
     fetch(`http://localhost:3000/notas/${login}`)
       .then(res => res.json())
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const somaSpan = linha.querySelector(".soma");
             somaSpan.textContent = nota.soma.toFixed(2);
 
-            // ❌ Impede edição pelo aluno
+            
             inputs.forEach(input => {
               input.setAttribute("readonly", true);
               input.style.backgroundColor = "#f1f1f1";
@@ -30,14 +30,14 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
 
-        // Oculta o botão de salvar para aluno
+        
         const botaoSalvar = document.getElementById("salvar");
         if (botaoSalvar) botaoSalvar.style.display = "none";
       })
       .catch(() => alert("Erro ao carregar notas do aluno"));
   }
 
-  // 🧑‍🏫 Se for professor, permitir edição e salvar
+  
   if (tipo === "professor") {
     linhas.forEach((linha) => {
       const inputs = linha.querySelectorAll("input.nota");

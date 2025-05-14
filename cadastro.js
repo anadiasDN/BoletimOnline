@@ -26,7 +26,7 @@ document.querySelector("#cadastro").addEventListener("click", (ev) => {
     .then(res => res.json())
     .then(data => {
       alert(data.mensagem || "Cadastro realizado!");
-      window.location.href = "./login.html";
+      window.location.href = "./index.html";
     })
     .catch(() => alert("Erro ao cadastrar"));
 });
