@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const login = localStorage.getItem("login");
   const linhas = document.querySelectorAll("tbody tr");
 
+  function normalizarTexto(texto) {
+    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  }
   
   if (tipo === "aluno") {
     fetch(`http://localhost:3000/notas/${login}`)
@@ -10,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(dados => {
         dados.forEach(nota => {
           const linha = [...linhas].find(tr =>
-            tr.children[0].textContent.trim() === nota.materia
+            normalizarTexto(tr.children[0].textContent) === normalizarTexto(nota.materia)
           );
 
           if (linha) {
